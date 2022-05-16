@@ -22,7 +22,7 @@
 
 <body>
     <div id="root">
-        <ul>
+        <ul v-if="arrayIndirizzi.length === 10">
             <li v-for="mail in arrayIndirizzi">
                 {{mail}}
 

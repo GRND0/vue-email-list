@@ -1,25 +1,20 @@
-const app = new Vue(
-    {
-        el: '#root',
-        data: {
-            arrayIndirizzi: [],
-
+const app = new Vue({
+    el: '#root',
+    mounted() {
+        this.compilatoreArray();
+    },
+    data: {
+        arrayIndirizzi: [],
+    },
+    methods: {
+        compilatoreArray() {
+            for(let i = 0; i < 10; i++){
+                axios.get("https://flynn.boolean.careers/exercises/api/random/mail")
+                .then((datiApi) => {
+                    let indirizzo = datiApi.data.response;
+                    this.arrayIndirizzi.push(indirizzo);
+                })
+            }
         },
-
-        methods: {
-            compilatoreArray() {
-                let arrayInterno = []
-                do {
-                    axios.get("https://flynn.boolean.careers/exercises/api/random/mail")
-                        .then((datiApi) => {
-                            let indirizzi = datiApi.data.response;
-                            arrayInterno.push(indirizzi);
-                        })
-                } while (arrayInterno.length < 10)
-                this.arrayIndirizzi = arrayInterno;
-
-            },
-
-
-        },
-    });
+    },
+});
